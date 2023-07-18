@@ -1,12 +1,12 @@
 <center>
 <h1> Customer List</h1>
 
-<b> Create your wishlist record here</b>
+<b> Create your customerlist record here</b>
 
 <form action="/save" method="POST">
 	
-	<label for="username">Username</label>
-	<input name="username" id="username" required><br><br>
+	<label for="customer">customer</label>
+	<input name="customer" id="customer" required><br><br>
 
 	<label for="place">Favorite Place</label>
 	<input name="place" id="place" required><br><br>
@@ -18,15 +18,15 @@
 
 </form>
 
-<b>Type in the username and fetch the WishList</b>
+<b>Type in the customer and fetch the customerlist</b>
 <form action="/get" method="POST">
-	<label for="username">Username</label>
-	<input name="username" id="username" required><br><br>
+	<label for="customer">customer</label>
+	<input name="customer" id="customer" required><br><br>
 	<input type="submit" value="Submit">
 </form>
 
 {% if get %}
-<font color="blue">The Wishlist for <b>{{username}}</b> is <b>{{place}}</b> and <b>{{food}}</b></font>
+<font color="blue">The customerlist for <b>{{customer}}</b> is <b>{{place}}</b> and <b>{{food}}</b></font>
 <small>{{msg}}</small>
 {% endif %}
 
@@ -35,12 +35,12 @@
 {% endif %}
 
 {% if user_exists %}
-<font color="red">User <b>{{username}}</b> already exists with the customerlist <b>{{place}}</b> and <b>{{food}}</b></font>
+<font color="red">User <b>{{customer}}</b> already exists with the customerlist <b>{{place}}</b> and <b>{{food}}</b></font>
 <small>{{msg}}</small>
 {% endif %}
 
 {% if saved %}
-<font color="green"> Successfully saved data for <b>{{username}}</b> with customerlist <b>{{place}}</b> and <b>{{food}}</b>!!!</font>
+<font color="green"> Successfully saved data for <b>{{customer}}</b> with customerlist <b>{{place}}</b> and <b>{{food}}</b>!!!</font>
 {% endif %}
 
 </center>
@@ -50,8 +50,8 @@
 	<h3> Keys </h3>
 	<small>(From DataBase)</small>
 	<ul>
-	{% for username in usernames %}
-		<li>{{username}}</li>
+	{% for customer in customers %}
+		<li>{{customer}}</li>
 	{% endfor %}
 	</ul>
 {% endif %}
