@@ -1,0 +1,24 @@
+
+
+1 create cluseter in google cloud:
+Kubernetes Engine -> Create 
+Name:user-wishlist-cluster
+Region:europe-west1
+
+2.  install nginx
+gcloud container clusters get-credentials customer-list --zone europe-west1 --project servercloudtechnologies
+3.install helm
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+helm install my-release ingress-nginx/ingress-nginx
+kubectl --namespace default get services -o wide -w my-release-ingress-nginx-controller
+
+4. add password ???
+kubectl create secret generic pgpassword --from-literal=PGPASSWORD=hello_flask
+
+4. get application from git
+git clone https://github.com/maureenmuys/ServerCloudTechnologies.git
+cd ServerCloudTechnologies
+cd 
+
+5. install yml files
+kubectl apply -f k8s/
