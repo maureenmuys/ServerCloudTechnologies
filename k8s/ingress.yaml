@@ -3,7 +3,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 
 metadata:
-  name: customer-app-ingress
+  name: wishlist-app-ingress
 
 spec:
   rules:
