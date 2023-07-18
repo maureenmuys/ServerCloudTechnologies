@@ -19,7 +19,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://{POSTGRES_USER}:{POSTGRES
 # postgresql://username:password@host:port/database
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://hello_flask:hello_flask@db:5432/hello_flask_dev'
 
-from models import db, UserFavs
+from models import db, CustomerFavs
 
 db.init_app(app)
 with app.app_context():
@@ -42,23 +42,23 @@ def save():
     # check if data of the customer already exists in the redis
     if red.hgetall(customer).keys():
         print("hget customer:", red.hgetall(customer))
-        # return a msg to the template, saying the user already exists(from redis)
-        return render_template('index.html', user_exists=1, msg='(From Redis)', customer=customer, place=red.hget(customer,"place").decode('utf-8'), food=red.hget(customer,"food").decode('utf-8'))
+        # return a msg to the template, saying the customer already exists(from redis)
+        return render_template('index.html', customer_exists=1, msg='(From Redis)', customer=customer, place=red.hget(customer,"place").decode('utf-8'), food=red.hget(customer,"food").decode('utf-8'))
 
     # if not in redis, then check in db
     elif len(list(red.hgetall(customer)))==0:
-        record =  UserFavs.query.filter_by(customer=customer).first()
+        record =  CustomerFavs.query.filter_by(customer=customer).first()
         print("Records fecthed from db:", record)
         
         if record:
             red.hset(customer, "place", place)
             red.hset(customer, "food", food)
-            # return a msg to the template, saying the user already exists(from database)
-            return render_template('index.html', user_exists=1, msg='(From DataBase)', customer=customer, place=record.place, food=record.food)
+            # return a msg to the template, saying the customer already exists(from database)
+            return render_template('index.html', customer_exists=1, msg='(From DataBase)', customer=customer, place=record.place, food=record.food)
 
     # if data of the customer doesnot exist anywhere, create a new record in DataBase and store in Redis also
     # create a new record in DataBase
-    new_record = UserFavs(customer=customer, place=place, food=food)
+    new_record = CustomerFavs(customer=customer, place=place, food=food)
     db.session.add(new_record)
     db.session.commit()
 
@@ -67,7 +67,7 @@ def save():
     red.hset(customer, "food", food)
 
     # cross-checking if the record insertion was successful into database
-    record =  UserFavs.query.filter_by(customer=customer).first()
+    record =  CustomerFavs.query.filter_by(customer=customer).first()
     print("Records fetched from db after insert:", record)
 
     # cross-checking if the insertion was successful into redis
@@ -78,7 +78,7 @@ def save():
 
 @app.route("/keys", methods=['GET'])
 def keys():
-	records = UserFavs.query.all()
+	records = CustomerFavs.query.all()
 	names = []
 	for record in records:
 		names.append(record.customer)
@@ -89,11 +89,11 @@ def keys():
 def get():
 	customer = request.form['customer']
 	print("customer:", customer)
-	user_data = red.hgetall(customer)
-	print("GET Redis:", user_data)
+	customer_data = red.hgetall(customer)
+	print("GET Redis:", customer_data)
 
-	if not user_data:
-		record = UserFavs.query.filter_by(customer=customer).first()
+	if not customer_data:
+		record = CustomerFavs.query.filter_by(customer=customer).first()
 		print("GET Record:", record)
 		if not record:
 			print("No data in redis or db")
@@ -101,4 +101,4 @@ def get():
 		red.hset(customer, "place", record.place)
 		red.hset(customer, "food", record.food)
 		return render_template('index.html', get=1, msg="(From DataBase)",customer=customer, place=record.place, food=record.food)
-	return render_template('index.html',get=1, msg="(From Redis)", customer=customer, place=user_data[b'place'].decode('utf-8'), food=user_data[b'food'].decode('utf-8'))
+	return render_template('index.html',get=1, msg="(From Redis)", customer=customer, place=customer_data[b'place'].decode('utf-8'), food=customer_data[b'food'].decode('utf-8'))

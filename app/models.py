@@ -13,5 +13,5 @@ class CustomerFavs(db.Model):
 		self.food=food
 
 	def __repr__(self):
-		return f'<User-Place-Food : {self.customer}-{self.place}-{self.food}'
+		return f'<Customer-Place-Food : {self.customer}-{self.place}-{self.food}'
 
