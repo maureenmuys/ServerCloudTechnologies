@@ -1,0 +1,32 @@
+https://www.youtube.com/watch?v=VNTG9IBnwAI
+
+
+https://github.com/maureenmuys/ServerCloudTechnologies.git
+DatWeVriendenZijn
+
+Kubernetes Engine -> Create 
+
+Region:
+europe-west1
+
+
+gcloud container clusters get-credentials customer-list2 --zone europe-west1 --project servercloudtechnologies
+install helm
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+helm install my-release ingress-nginx/ingress-nginx
+status of install 
+kubectl --namespace default get services -o wide -w my-release-ingress-nginx-controller
+kubectl create secret generic pgpassword --from-literal=PGPASSWORD=hello_flask
+kubectl get secrets
+kubectl apply -f k8s/
+kubectl get pods
+kubectl get services
+kubectl get pvc
+kubectl get ingress
+
+
+git clone https://github.com/maureenmuys/ServerCloudTechnologies.git
+cd customer-wishlist-k8s
+
+
+git remote set-url origin https://github.com/maureenmuys/ServerCloudTechnologies.git
