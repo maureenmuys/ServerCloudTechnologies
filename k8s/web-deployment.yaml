@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: customer-app-container
-          image: maureen/user-customer-k8s:v1
+          image: maureenmuys/ServerCloudTechnologies:v1
           ports:
           - containerPort: 80
           env:
