@@ -6,6 +6,8 @@ metadata:
   name: wishlist-app-ingress
 
 spec:
+  tls:
+    - secretName: secret-nginx
   rules:
     - http: 
         paths:
