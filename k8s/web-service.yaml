@@ -10,5 +10,5 @@ spec:
     component: wishlist-app
   type: ClusterIP
   ports:
-    - port: 80
+    - port: 443
       targetPort: 80

@@ -15,7 +15,7 @@ spec:
         - name: wishlist-app-container
           image: maureenmuys/user-wishlist-k8s:v1
           ports:
-          - containerPort: 80
+          - containerPort: 443
           env:
             - name: REDIS_HOST
               value: redis-service
