@@ -23,7 +23,7 @@ spec:
             - name: PGADMIN_DEFAULT_EMAIL
               value: maureen.muys@student.ehb.be
             - name: PGADMIN_DEFAULT_PASSWORD
-              value: supersecret       
+              value: supersecret
           resources:
             requests:
               cpu: 100m
