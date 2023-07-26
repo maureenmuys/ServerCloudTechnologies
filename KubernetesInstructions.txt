@@ -17,6 +17,7 @@ helm install my-release ingress-nginx/ingress-nginx
 status of install 
 kubectl --namespace default get services -o wide -w my-release-ingress-nginx-controller
 kubectl create secret generic pgpassword --from-literal=PGPASSWORD=hello_flask
+kubectl create secret generic pgusername --from-literal=PGUSERNAME=pgadmin
 kubectl get secrets
 kubectl apply -f k8s/
 kubectl get pods
