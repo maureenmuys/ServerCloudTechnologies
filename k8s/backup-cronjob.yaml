@@ -2,6 +2,7 @@ apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
   name: postgres-backup
+  namespace: default
 spec:
   schedule: "0 0 * * *"  # Run every day at midnight
   jobTemplate:
@@ -10,5 +11,5 @@ spec:
         spec:
           containers:
             - name: postgres-backup
-              image: gcr.io/servercloudtechnologies/postgres-backup:latest  # Replace with your Docker image path
+              image: gcr.io/servercloudtechnologies/postgres-backup:latest
           restartPolicy: OnFailure
