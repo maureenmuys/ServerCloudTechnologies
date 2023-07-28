@@ -2,6 +2,7 @@ FROM ubuntu:latest
 
 # Install necessary dependencies
 RUN apt-get update &&  apt-get install -y postgresql-client
+RUN apt-get update &&  apt-get install -y python
 
 # Copy the backup scripts
 COPY backup_script.sh /
