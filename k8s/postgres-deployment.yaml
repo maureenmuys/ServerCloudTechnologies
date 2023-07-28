@@ -33,8 +33,6 @@ spec:
               subPath: postgres
 
           env:
-            - name: POSTGRES_USER
-              value: hello_flask
             - name: POSTGRES_DB
               value: hello_flask_db
             - name: POSTGRES_PASSWORD
