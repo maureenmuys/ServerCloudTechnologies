@@ -20,16 +20,10 @@ spec:
           ports:
             - containerPort: 80
           env:
-           - name: PGADMIN_DEFAULT_EMAIL
-              valueFrom:
-                secretKeyRef:
-                  name: pgadmindefemail
-                  key: PGADMINDEFEMAIL
+            - name: PGADMIN_DEFAULT_EMAIL
+              value: maureen.muys@student.ehb.be
             - name: PGADMIN_DEFAULT_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: pgadmindefpassword   
-                  key: PGADMINDEFAULTPASSWORD
+              value: supersecret
           resources:
             requests:
               cpu: 100m
