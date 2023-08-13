@@ -17,5 +17,5 @@ spec:
               service:
                 name: web-service
                 port: 
-                  number: 80
+                  number: 443
 
